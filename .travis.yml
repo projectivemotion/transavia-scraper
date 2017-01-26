@@ -7,4 +7,4 @@ before_script:
   - composer self-update
   - composer install --prefer-source --no-interaction --dev
 
-script: php -f demo/transavia.php BCN CRA $(date -d 'next saturday' +%Y-%m-%d) $(date -d 'next saturday next month' +%Y-%m-%d)
+script: php -f demo/transavia.php BCN MUC 2017-03-26 2017-03-30

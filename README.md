@@ -24,6 +24,31 @@ Last Verified: 2017-01-25
 See `demo/` directory. for an example
 
 Usage: demo/transavia.php BCN MUC 2017-03-26 2017-03-30
+```
+$ php -f demo/transavia.php BCN MUC 2017-03-26 2017-03-30
+Using Parameters: BCN - MUC / 2017-03-26 - 2017-03-30
+
+{
+    "outbound": {
+        "HV9656": {
+            "flight_number": "HV9656",
+            "departure_time": "9:30",
+            "arrival_time": "11:40",
+            "currency": "€",
+            "price": "46"
+        }
+    },
+    "inbound": {
+        "HV9655": {
+            "flight_number": "HV9655",
+            "departure_time": "13:00",
+            "arrival_time": "15:05",
+            "currency": "€",
+            "price": "46"
+        }
+    }
+}
+```
 
 # License
 The MIT License (MIT)
