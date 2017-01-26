@@ -43,10 +43,7 @@ class Scraper
 
     public function setTokens($body)
     {
-        libxml_use_internal_errors(true);
-            $dom = new \DOMDocument();
-            $dom->loadHTML($body);
-        libxml_clear_errors();
+        $dom = $this->getDoc($body);
         $xpath = new \DOMXPath($dom);
         $tags = $xpath->query('//input[@name="__RequestVerificationToken"]');
 
@@ -91,7 +88,7 @@ class Scraper
 //            $this->setTokens($res->getResponseBody());
 
         if(strpos($res->getHeader('Content-Type')[0], 'application/json') === 0)
-            return json_decode($res->getBody());
+            return json_decode((string)$res->getBody());
 
         return (string)$res->getBody();
     }
@@ -149,10 +146,7 @@ class Scraper
             $this->setError('Unable to load single day availability');
         }
 
-        libxml_use_internal_errors(true);
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->loadHTML($body);
-        libxml_clear_errors();
+        $dom = $this->getDoc($body);
 
         $xpath = new \DOMXPath($dom);
         $flight_nodes = $xpath->query('//button[@name="selectFlight.MarketFareKey"]');
@@ -170,7 +164,7 @@ class Scraper
             $flight_info['flight_number']   =   $xpath->query('//li[@class="flight-number"]', $flight_n)[0]->lastChild->textContent;
             $foo = $xpath->query('.//div[contains(@class, "price")]', $flight_n);
             $flight_info['price']   =   preg_replace('#[^0-9\.]#', '', $foo[0]->textContent);
-            $flight_info['currency']   =   utf8_decode($xpath->query('//span[@class="currency"]', $flight_n)[0]->textContent);
+            $flight_info['currency']   =   $xpath->query('//span[@class="currency"]', $flight_n)[0]->textContent;
 
             $flightlist[$flight_info['flight_number']] = $flight_info;
         }
@@ -208,10 +202,7 @@ class Scraper
 
     public function getAvailableDates($multiAvailabilityResponse, &$tokenvalue)
     {
-        libxml_use_internal_errors(true);
-        $dom = new \DOMDocument();
-        $dom->loadHTML($multiAvailabilityResponse);
-        libxml_clear_errors();
+        $dom = $this->getDoc($multiAvailabilityResponse);
 
         $date_prices    =   [];
         $xpath = new \DOMXPath($dom);
@@ -233,5 +224,18 @@ class Scraper
         }
 
         return $date_prices;
+    }
+
+    /**
+     * @param $body
+     * @return \DOMDocument
+     */
+    public function getDoc($body)
+    {
+        libxml_use_internal_errors(true);
+        $dom = new \DOMDocument();
+        $dom->loadHTML('<?xml encoding="utf-8" ?>' . $body);
+        libxml_clear_errors();
+        return $dom;
     }
 }

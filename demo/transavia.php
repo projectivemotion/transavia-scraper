@@ -42,5 +42,5 @@ $query->setDestination($destination);
 $scraper    =   new \projectivemotion\TransaviaScraper\Scraper();
 
 $result = $scraper->getFlights($query);
-echo json_encode($result, JSON_PRETTY_PRINT);
+echo json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 

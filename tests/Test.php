@@ -47,8 +47,6 @@ HDOC
 
         $availability = $scraper->parseMultiAvailability($json_no_availability);
 
-        $this->assertEquals('vpW3qkKi6yfelcmjErqsgMocFG24CmDVMGDedYXK58CtcXLCrnWflckRT1-VJEDil-utx-FhirrwV7oUiguvIU69aHVrVJDNbYBL9BdOMzc1', $availability['outbound_token']);
-        $this->assertEquals('1RAybeS7NGM0mltP5eERVRaNgOz5SGBZyskWXaOkX3J473cvrXijzFg0F68Gfzk049Jk7Whua4SJWGv9IoP1PCMz_uQI82hU1q-_4butCqw1',  $availability['inbound_token']);
         $this->assertEmpty($availability['Outbound']);
         $this->assertEmpty($availability['Inbound']);
     }
