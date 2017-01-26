@@ -1,19 +1,23 @@
 {
     "name": "projectivemotion/transavia-scraper",
-    "type": "library",
+    "description": "Transavia.com Flights Information Scraper",
+    "minimum-stability": "stable",
+    "keywords": ["airline", "scraper","transavia"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Amado Martinez",
+            "email": "amado@projectivemotion.com",
+            "role": "Developer",
+            "homepage": "http://amadomartinez.mx"
+        }
+    ],
     "require": {
         "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.7"
     },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Amado Martinez",
-            "email": "amado@projectivemotion.com"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "projectivemotion\\TransaviaScraper\\" : "src/"

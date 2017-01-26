@@ -20,8 +20,28 @@ class Scraper
     protected $client;
 
     protected $tokens    =   [];
-
     protected $errors = [];
+
+    protected $options  =   [];
+
+    public function setOptions($options)
+    {
+        $this->options = $options;
+    }
+
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    public function __construct($options = [])
+    {
+        $this->setOptions([
+            'base_uri' => 'https://www.transavia.com',
+            'cookies' => true
+        ] + $options);
+    }
+
 
     public function setClient($client)
     {
@@ -32,10 +52,7 @@ class Scraper
     {
         if(!$this->client){
             $this->setClient(new Client(
-                [
-                    'base_uri' => 'https://www.transavia.com',
-                    'cookies' => true
-                ]
+                $this->getOptions()
             ));
         }
         return $this->client;
